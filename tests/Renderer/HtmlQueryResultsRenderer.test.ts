@@ -194,7 +194,7 @@ group by function 'level4'
         const tasks = fromMarkdown(`
 - [ ] 1 ⏳ 2025-10-29
 - [ ] 2 ⏬
-- [ ] 3 ⏫ ⏳ 2025-10-30
+- [ ] 3 🔴 ⏳ 2025-10-30
 - [ ] 4 ⏳ 2025-10-29
 `);
 

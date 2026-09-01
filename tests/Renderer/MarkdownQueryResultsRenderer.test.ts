@@ -20,7 +20,7 @@ describe('MarkdownQueryResultsRenderer tests', () => {
         ]);
         expect(markdown).toMatchInlineSnapshot(`
             "
-            - [ ] hello 🔼
+            - [ ] hello 🟡
             "
         `);
     });
@@ -47,8 +47,8 @@ describe('MarkdownQueryResultsRenderer tests', () => {
         ]);
         expect(markdown).toMatchInlineSnapshot(`
             "
-            - [ ] hello 🔼
-            - [ ] bye ⏫
+            - [ ] hello 🟡
+            - [ ] bye 🔴
             "
         `);
     });
@@ -82,7 +82,7 @@ describe('MarkdownQueryResultsRenderer tests', () => {
         const tasks = fromMarkdown(`
 - [ ] 1 ⏳ 2025-10-29
 - [ ] 2 ⏬
-- [ ] 3 ⏫ ⏳ 2025-10-30
+- [ ] 3 🔴 ⏳ 2025-10-30
 - [ ] 4 ⏳ 2025-10-29
 - [ ] 5 #something
 - [ ] 6 🆔 id6
@@ -103,7 +103,7 @@ group by id
 
             ###### 2025-10-30 Thursday
 
-            - [ ] 3 ⏫ ⏳ 2025-10-30
+            - [ ] 3 🔴 ⏳ 2025-10-30
 
             ##### %%3%%Normal priority
 
@@ -139,7 +139,7 @@ group by id
         const tasks = fromMarkdown(`
 - [ ] 1 ⏳ 2025-10-29
 - [ ] 2 ⏬
-- [ ] 3 ⏫ ⏳ 2025-10-30
+- [ ] 3 🔴 ⏳ 2025-10-30
 - [ ] 4 ⏳ 2025-10-29
 `);
 
@@ -156,7 +156,7 @@ show group count
 
 ##### 2025-10-30 Thursday (1 task)
 
-- [ ] 3 ⏫ ⏳ 2025-10-30
+- [ ] 3 🔴 ⏳ 2025-10-30
 
 #### %%3%%Normal priority
 

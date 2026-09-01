@@ -308,7 +308,7 @@ description includes \
     });
 
     describe('should not confuse a boolean query for any other single field', () => {
-        const taskLine = '- [ ] this is a task due 📅 2021-09-12 #inside_tag ⏫ #some/tags_with_underscore';
+        const taskLine = '- [ ] this is a task due 📅 2021-09-12 #inside_tag 🔴 #some/tags_with_underscore';
         const task = fromLine({
             line: taskLine,
         });
@@ -1889,8 +1889,8 @@ Problem line: "view nonsense"`);
 
     describe('grouping instructions in conjunction with columns view', () => {
         const tasksAsMarkdown = `
-- [ ] Task 1 - Todo - high priority ⏫
-- [x] Task 2 - Done   priority 🔽
+- [ ] Task 1 - Todo - high priority 🔴
+- [x] Task 2 - Done   priority 🟢
             `;
 
         it('should apply the "view columns" grouper automatically', () => {
@@ -1903,11 +1903,11 @@ Problem line: "view nonsense"`);
             const expectedResultsAsMarkdown = `
 #### %%1%%High priority
 
-- [ ] Task 1 - Todo - high priority ⏫
+- [ ] Task 1 - Todo - high priority 🔴
 
 #### %%4%%Low priority
 
-- [x] Task 2 - Done   priority 🔽
+- [x] Task 2 - Done   priority 🟢
 `;
             searchTasksAndTestResultsAsMarkdown(tasksAsMarkdown, source, expectedResultsAsMarkdown);
         });
@@ -1926,13 +1926,13 @@ Problem line: "view nonsense"`);
 
 ##### %%4%%Low priority
 
-- [x] Task 2 - Done   priority 🔽
+- [x] Task 2 - Done   priority 🟢
 
 #### Todo
 
 ##### %%1%%High priority
 
-- [ ] Task 1 - Todo - high priority ⏫
+- [ ] Task 1 - Todo - high priority 🔴
 `;
             searchTasksAndTestResultsAsMarkdown(tasksAsMarkdown, source, expectedResultsAsMarkdown);
         });

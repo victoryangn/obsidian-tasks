@@ -17,16 +17,16 @@
     "appendText": "⏳ "
   },
   {
-    "displayText": "⏫ high priority",
-    "appendText": "⏫ "
+    "displayText": "🔴 high priority",
+    "appendText": "🔴 "
   },
   {
-    "displayText": "🔼 medium priority",
-    "appendText": "🔼 "
+    "displayText": "🟡 medium priority",
+    "appendText": "🟡 "
   },
   {
-    "displayText": "🔽 low priority",
-    "appendText": "🔽 "
+    "displayText": "🟢 low priority",
+    "appendText": "🟢 "
   },
   {
     "displayText": "🔺 highest priority",

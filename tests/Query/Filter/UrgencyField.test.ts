@@ -85,10 +85,10 @@ describe('grouping by urgency', () => {
     // Numbers taken from:
     // https://publish.obsidian.md/tasks/Advanced/Urgency
     it.each([
-        ['- [ ] a ⏫', ['6.00']],
-        ['- [ ] a 🔼', ['3.90']],
+        ['- [ ] a 🔴', ['6.00']],
+        ['- [ ] a 🟡', ['3.90']],
         ['- [ ] a', ['1.95']],
-        ['- [ ] a 🔽', ['0.00']],
+        ['- [ ] a 🟢', ['0.00']],
     ])('task "%s" should have groups: %s', (taskLine: string, groups: string[]) => {
         // Arrange
         const grouper = new UrgencyField().createNormalGrouper();
@@ -99,7 +99,7 @@ describe('grouping by urgency', () => {
     });
 
     describe('should sort groups for UrgencyField', () => {
-        const taskLines = ['- [ ] a ⏫', '- [ ] a 🔼', '- [ ] a', '- [ ] a 🔽'];
+        const taskLines = ['- [ ] a 🔴', '- [ ] a 🟡', '- [ ] a', '- [ ] a 🟢'];
         const tasks = taskLines.map((taskLine) => fromLine({ line: taskLine }));
 
         it('highest urgency first with normal grouper', () => {

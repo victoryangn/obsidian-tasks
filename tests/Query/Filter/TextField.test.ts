@@ -112,8 +112,8 @@ describe('explains regular expression searches', () => {
             description regex matches /#context\\/pc_photos|#context\\/pc_clare|#context\\/pc_macbook/i
             description regex matches /#tag\\/subtag[0-9]\\/subsubtag[0-9]/i
             description regex matches /(buy|order|voucher|lakeland|purchase|\\spresent)/i
-            description regex matches /[⏫🔼🔽📅⏳🛫🔁]/
-            description regex matches /[⏫🔼🔽📅⏳🛫🔁]/u
+            description regex matches /[🔴🟡🟢📅⏳🛫🔁]/
+            description regex matches /[🔴🟡🟢📅⏳🛫🔁]/u
             description regex matches /^$/
             description regex matches /^Log/i
             description regex matches /waiting|waits|wartet/

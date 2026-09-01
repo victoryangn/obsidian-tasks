@@ -29,7 +29,7 @@ describe('validateRegExpSafety', () => {
         ['^Log'],
         ['waiting|waits|wartet'],
         [String.raw`#tag\/subtag[0-9]\/subsubtag[0-9]`],
-        [String.raw`[⏫🔼🔽📅⏳🛫🔁]`],
+        [String.raw`[🔴🟡🟢📅⏳🛫🔁]`],
     ])('should accept safe pattern: %s', (pattern: string) => {
         expect(validateRegExpSafety(pattern)).toBeNull();
     });

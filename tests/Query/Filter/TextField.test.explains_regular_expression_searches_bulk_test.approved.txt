@@ -19,11 +19,11 @@ description regex matches /#tag\/subtag[0-9]\/subsubtag[0-9]/i =>
 description regex matches /(buy|order|voucher|lakeland|purchase|\spresent)/i =>
   using regex:            '(buy|order|voucher|lakeland|purchase|\spresent)' with flag 'i'
 
-description regex matches /[⏫🔼🔽📅⏳🛫🔁]/ =>
-  using regex:            '[⏫🔼🔽📅⏳🛫🔁]' with no flags
+description regex matches /[🔴🟡🟢📅⏳🛫🔁]/ =>
+  using regex:            '[🔴🟡🟢📅⏳🛫🔁]' with no flags
 
-description regex matches /[⏫🔼🔽📅⏳🛫🔁]/u =>
-  using regex:            '[⏫🔼🔽📅⏳🛫🔁]' with flag 'u'
+description regex matches /[🔴🟡🟢📅⏳🛫🔁]/u =>
+  using regex:            '[🔴🟡🟢📅⏳🛫🔁]' with flag 'u'
 
 description regex matches /^$/ =>
   using regex:            '^$' with no flags

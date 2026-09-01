@@ -7,11 +7,11 @@ Sort by the task's priority name.
 The priority names are displayed in alphabetical order.
 Note that the default priority is called 'Normal', as opposed to with `Sort by priority` which calls the default 'None'.
 =>
-- [ ] #task High priority ⏫
+- [ ] #task High priority 🔴
 - [ ] #task Highest priority 🔺
-- [ ] #task Low priority 🔽
+- [ ] #task Low priority 🟢
 - [ ] #task Lowest priority ⏬
-- [ ] #task Medium priority 🔼
+- [ ] #task Medium priority 🟡
 - [ ] #task Normal priority
 ====================================================================================
 

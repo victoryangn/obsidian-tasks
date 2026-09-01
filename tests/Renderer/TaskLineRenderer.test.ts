@@ -183,7 +183,7 @@ describe('task line rendering - layout options', () => {
                 'Do exercises #todo #health',
                 ' 🆔 abcdef',
                 ' ⛔ 123456,abc123',
-                ' 🔼',
+                ' 🟡',
                 ' 🔁 every day when done',
                 ' 🏁 delete',
                 ' ➕ 2023-07-01',
@@ -204,7 +204,7 @@ describe('task line rendering - layout options', () => {
                 'Do exercises #todo #health',
                 ' 🆔 abcdef',
                 ' ⛔ 123456,abc123',
-                ' 🔼',
+                ' 🟡',
                 ' 🔁 every day when done',
                 ' 🏁 delete',
                 ' ➕ 2023-07-01',
@@ -222,7 +222,7 @@ describe('task line rendering - layout options', () => {
     // NEW_TASK_FIELD_EDIT_REQUIRED
 
     it('renders with priority', async () => {
-        await testLayoutOptions(['Do exercises #todo #health', ' 🔼'], [TaskLayoutComponent.Priority]);
+        await testLayoutOptions(['Do exercises #todo #health', ' 🟡'], [TaskLayoutComponent.Priority]);
     });
 
     it('renders with recurrence rule', async () => {
@@ -325,17 +325,17 @@ describe('task line rendering - classes and data attributes', () => {
 
     it('should render priority component with its class and data attribute', async () => {
         await testComponentClasses(
-            '- [ ] Full task ⏫ ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
+            '- [ ] Full task 🔴 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
             'task-priority',
             'taskPriority: high',
         );
         await testComponentClasses(
-            '- [ ] Full task 🔼 📅 2022-07-02 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
+            '- [ ] Full task 🟡 📅 2022-07-02 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
             'task-priority',
             'taskPriority: medium',
         );
         await testComponentClasses(
-            '- [ ] Full task 🔽 📅 2022-07-02 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
+            '- [ ] Full task 🟢 📅 2022-07-02 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
             'task-priority',
             'taskPriority: low',
         );
@@ -348,7 +348,7 @@ describe('task line rendering - classes and data attributes', () => {
 
     it('should render recurrence component with its class and data attribute', async () => {
         await testComponentClasses(
-            '- [ ] Full task ⏫ 📅 2022-07-02 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
+            '- [ ] Full task 🔴 📅 2022-07-02 ⏳ 2022-07-03 🛫 2022-07-04 🔁 every day',
             'task-recurring',
             '',
         );
@@ -357,10 +357,10 @@ describe('task line rendering - classes and data attributes', () => {
     it('should render date component with its class and data attribute with "today" value', async () => {
         const today = DateParser.parseDate('today').format(TaskRegularExpressions.dateFormat);
         // This test ensures that all date fields are handled correctly.
-        await testComponentClasses(`- [ ] Full task ⏫ ➕ ${today}`, 'task-created', 'taskCreated: today');
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${today}`, 'task-due', 'taskDue: today');
-        await testComponentClasses(`- [ ] Full task ⏫ ⏳ ${today}`, 'task-scheduled', 'taskScheduled: today');
-        await testComponentClasses(`- [ ] Full task ⏫ 🛫 ${today}`, 'task-start', 'taskStart: today');
+        await testComponentClasses(`- [ ] Full task 🔴 ➕ ${today}`, 'task-created', 'taskCreated: today');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${today}`, 'task-due', 'taskDue: today');
+        await testComponentClasses(`- [ ] Full task 🔴 ⏳ ${today}`, 'task-scheduled', 'taskScheduled: today');
+        await testComponentClasses(`- [ ] Full task 🔴 🛫 ${today}`, 'task-start', 'taskStart: today');
         await testComponentClasses(`- [x] Done task ✅ ${today}`, 'task-done', 'taskDone: today');
         await testComponentClasses(`- [-] Canc task ❌ ${today}`, 'task-cancelled', 'taskCancelled: today');
     });
@@ -369,32 +369,32 @@ describe('task line rendering - classes and data attributes', () => {
     // only need to test a single date field.
     it('should render date component with its class and data attribute with "future-1d" value', async () => {
         const future = DateParser.parseDate('tomorrow').format(TaskRegularExpressions.dateFormat);
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${future}`, 'task-due', 'taskDue: future-1d');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${future}`, 'task-due', 'taskDue: future-1d');
     });
 
     it('should render date component with its class and data attribute with "future-7d" value', async () => {
         const future = DateParser.parseDate('in 7 days').format(TaskRegularExpressions.dateFormat);
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${future}`, 'task-due', 'taskDue: future-7d');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${future}`, 'task-due', 'taskDue: future-7d');
     });
 
     it('should render date component with its class and data attribute with "past-1d" value', async () => {
         const past = DateParser.parseDate('yesterday').format(TaskRegularExpressions.dateFormat);
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${past}`, 'task-due', 'taskDue: past-1d');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${past}`, 'task-due', 'taskDue: past-1d');
     });
 
     it('should render date component with its class and data attribute with "past-7d" value', async () => {
         const past = DateParser.parseDate('7 days ago').format(TaskRegularExpressions.dateFormat);
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${past}`, 'task-due', 'taskDue: past-7d');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${past}`, 'task-due', 'taskDue: past-7d');
     });
 
     it('should render date component with its class and data attribute with "future-far"', async () => {
         const future = DateParser.parseDate('in 8 days').format(TaskRegularExpressions.dateFormat);
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${future}`, 'task-due', 'taskDue: future-far');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${future}`, 'task-due', 'taskDue: future-far');
     });
 
     it('should render date component with its class and data attribute with "past-far" values', async () => {
         const past = DateParser.parseDate('8 days ago').format(TaskRegularExpressions.dateFormat);
-        await testComponentClasses(`- [ ] Full task ⏫ 📅 ${past}`, 'task-due', 'taskDue: past-far');
+        await testComponentClasses(`- [ ] Full task 🔴 📅 ${past}`, 'task-due', 'taskDue: past-far');
     });
 
     it('should not add data attributes for invalid dates', async () => {

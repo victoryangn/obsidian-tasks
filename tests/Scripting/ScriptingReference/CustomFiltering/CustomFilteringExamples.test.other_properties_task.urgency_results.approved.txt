@@ -34,9 +34,9 @@ filter by function task.urgency.toFixed(2) !== 1.95.toFixed(2)
 Find tasks with any urgency other than the default score of `1.95`.
 =>
 - [ ] #task Highest priority 🔺
-- [ ] #task High priority ⏫
-- [ ] #task Medium priority 🔼
-- [ ] #task Low priority 🔽
+- [ ] #task High priority 🔴
+- [ ] #task Medium priority 🟡
+- [ ] #task Low priority 🟢
 - [ ] #task Lowest priority ⏬
 - [ ] due 2023-06-11 📅 2023-06-11
 ====================================================================================

@@ -52,7 +52,7 @@ describe('urgency - test time-of-day impact on due-date score', () => {
         jest.useRealTimers();
     });
 
-    const task = fromLine({ line: '- [ ] #task 🔽 📅 2023-06-26', path: 'a/b/c.md', precedingHeader: null });
+    const task = fromLine({ line: '- [ ] #task 🟢 📅 2023-06-26', path: 'a/b/c.md', precedingHeader: null });
 
     it.each([
         // Force new line for each time

@@ -7,7 +7,7 @@ import type { TaskEditingInstruction } from '../EditInstructions/TaskEditingInst
 import { StatusMenu } from './StatusMenu';
 import { type TaskSaver, defaultTaskSaver } from './TaskEditingMenu';
 
-/** 中文显示的 A/B/C 类优先级标记（叶武滨 ABC 分类：A=⏫ 计划内要事、B=🔼 突发、C=🔽 干扰） */
+/** 中文显示的 A/B/C 类优先级标记（叶武滨 ABC 分类：A=🔴 计划内要事、B=🟡 突发、C=🟢 干扰） */
 class SetPriorityClass implements TaskEditingInstruction {
     constructor(private readonly priority: Priority, private readonly label: string) {}
 
@@ -95,9 +95,9 @@ export class YeWubinMenu extends StatusMenu {
         this.addItemsForInstructions(
             [
                 new MenuDividerInstruction(),
-                new SetPriorityClass(Priority.High, '⏫ 标记 A 类要事'),
-                new SetPriorityClass(Priority.Medium, '🔼 标记 B 类（突发）'),
-                new SetPriorityClass(Priority.Low, '🔽 标记 C 类（干扰）'),
+                new SetPriorityClass(Priority.High, '🔴 标记 A 类要事'),
+                new SetPriorityClass(Priority.Medium, '🟡 标记 B 类（突发）'),
+                new SetPriorityClass(Priority.Low, '🟢 标记 C 类（干扰）'),
                 new SetPriorityClass(Priority.None, '取消 A/B/C 标记'),
                 new MenuDividerInstruction(),
                 new PostponeOneDayInstruction(),

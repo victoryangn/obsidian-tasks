@@ -6,9 +6,9 @@ filter by function task.priorityName !== 'Normal'
 The same as `priority is not none`.
 =>
 - [ ] #task Highest priority 🔺
-- [ ] #task High priority ⏫
-- [ ] #task Medium priority 🔼
-- [ ] #task Low priority 🔽
+- [ ] #task High priority 🔴
+- [ ] #task Medium priority 🟡
+- [ ] #task Low priority 🟢
 - [ ] #task Lowest priority ⏬
 ====================================================================================
 

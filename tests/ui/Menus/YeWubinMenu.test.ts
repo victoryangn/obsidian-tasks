@@ -18,9 +18,9 @@ describe('YeWubinMenu', () => {
         const itemsAsText = menuToString(menu);
 
         expect(itemsAsText).toContain('Todo');
-        expect(itemsAsText).toContain('⏫ 标记 A 类要事');
-        expect(itemsAsText).toContain('🔼 标记 B 类（突发）');
-        expect(itemsAsText).toContain('🔽 标记 C 类（干扰）');
+        expect(itemsAsText).toContain('🔴 标记 A 类要事');
+        expect(itemsAsText).toContain('🟡 标记 B 类（突发）');
+        expect(itemsAsText).toContain('🟢 标记 C 类（干扰）');
         expect(itemsAsText).toContain('取消 A/B/C 标记');
         expect(itemsAsText).toContain('⏩ 推迟一天');
         expect(itemsAsText).toContain('📥 转收件箱（清除日期，待排程）');
@@ -32,7 +32,7 @@ describe('YeWubinMenu', () => {
         const menu = new YeWubinMenu(task, undefined, TestableTaskSaver.testableTaskSaver);
         const itemsAsText = menuToString(menu);
 
-        expect(itemsAsText).toContain('x ⏫ 标记 A 类要事');
+        expect(itemsAsText).toContain('x 🔴 标记 A 类要事');
     });
 
     it('should save task with new priority when A class selected', async () => {
@@ -41,7 +41,7 @@ describe('YeWubinMenu', () => {
 
         // @ts-expect-error TS2339: Property 'items' does not exist on type 'YeWubinMenu'.
         const items = menu.items as Array<{ title: string | DocumentFragment; callback: () => unknown }>;
-        const itemA = items.find((item) => item.title === '⏫ 标记 A 类要事');
+        const itemA = items.find((item) => item.title === '🔴 标记 A 类要事');
         expect(itemA).toBeDefined();
         await itemA!.callback();
 

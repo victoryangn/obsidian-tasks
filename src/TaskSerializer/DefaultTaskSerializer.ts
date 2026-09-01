@@ -85,9 +85,10 @@ export const DEFAULT_SYMBOLS: DefaultTaskSerializerSymbols = {
     // NEW_TASK_FIELD_EDIT_REQUIRED
     prioritySymbols: {
         Highest: '🔺',
-        High: '⏫',
-        Medium: '🔼',
-        Low: '🔽',
+        // 叶武滨定制：A/B/C 类用彩色圆点（看板/移动端均醒目，字符自带颜色）
+        High: '🔴',
+        Medium: '🟡',
+        Low: '🟢',
         Lowest: '⏬',
         None: '',
     },
@@ -102,7 +103,7 @@ export const DEFAULT_SYMBOLS: DefaultTaskSerializerSymbols = {
     dependsOnSymbol: '⛔',
     idSymbol: '🆔',
     TaskFormatRegularExpressions: {
-        priorityRegex: fieldRegex('(🔺|⏫|🔼|🔽|⏬)', ''),
+        priorityRegex: fieldRegex('(🔺|🔴|🟡|🟢|⏬)', ''),
         startDateRegex: dateFieldRegex('🛫'),
         createdDateRegex: dateFieldRegex('➕'),
         scheduledDateRegex: dateFieldRegex('(?:⏳|⌛)'),

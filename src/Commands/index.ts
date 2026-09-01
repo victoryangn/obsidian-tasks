@@ -91,21 +91,21 @@ export class Commands {
     private addYeWubinCommands(plugin: TasksPlugin) {
         plugin.addCommand({
             id: 'toggle-priority-a',
-            name: '标记/取消 A 类要事（⏫）',
+            name: '标记/取消 A 类要事（🔴）',
             icon: 'flame',
             editorCheckCallback: togglePriorityA,
         });
 
         plugin.addCommand({
             id: 'toggle-priority-b',
-            name: '标记/取消 B 类（🔼）',
+            name: '标记/取消 B 类（🟡）',
             icon: 'cloud',
             editorCheckCallback: togglePriorityB,
         });
 
         plugin.addCommand({
             id: 'toggle-priority-c',
-            name: '标记/取消 C 类（🔽）',
+            name: '标记/取消 C 类（🟢）',
             icon: 'tag',
             editorCheckCallback: togglePriorityC,
         });

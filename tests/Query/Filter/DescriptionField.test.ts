@@ -30,7 +30,7 @@ describe('description should strip signifiers, some duplicate spaces and trailin
     it('without global filter - all tags included', () => {
         // Arrange
         const task = fromLine({
-            line: '- [ ]   Initial  description  ⏫  #tag1 ✅ 2022-08-12 #tag2/sub-tag ',
+            line: '- [ ]   Initial  description  🔴  #tag1 ✅ 2022-08-12 #tag2/sub-tag ',
         });
 
         // Act, Assert
@@ -46,7 +46,7 @@ describe('description should strip signifiers, some duplicate spaces and trailin
         GlobalFilter.getInstance().set('#task');
 
         const task = fromLine({
-            line: '- [ ] #task Initial  description  ⏫  #tag1 ✅ 2022-08-12 #tag2/sub-tag ',
+            line: '- [ ] #task Initial  description  🔴  #tag1 ✅ 2022-08-12 #tag2/sub-tag ',
         });
 
         // Act, Assert
@@ -62,7 +62,7 @@ describe('description should strip signifiers, some duplicate spaces and trailin
         GlobalFilter.getInstance().set('global-filter');
 
         const task = fromLine({
-            line: '- [ ] global-filter Initial  description  ⏫  #tag1 ✅ 2022-08-12 #tag2/sub-tag ',
+            line: '- [ ] global-filter Initial  description  🔴  #tag1 ✅ 2022-08-12 #tag2/sub-tag ',
         });
 
         // Act, Assert

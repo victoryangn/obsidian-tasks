@@ -65,7 +65,7 @@ describe('validate emoji regular expressions', () => {
     it('regular expressions should have expected source', () => {
         expect(generateRegexApprovalTest()).toMatchInlineSnapshot(`
             "
-            priorityRegex: /(🔺|⏫|🔼|🔽|⏬)\\ufe0f?$/
+            priorityRegex: /(🔺|🔴|🟡|🟢|⏬)\\ufe0f?$/
             startDateRegex: /🛫\\ufe0f? *(\\d{4}-\\d{2}-\\d{2})$/
             createdDateRegex: /➕\\ufe0f? *(\\d{4}-\\d{2}-\\d{2})$/
             scheduledDateRegex: /(?:⏳|⌛)\\ufe0f? *(\\d{4}-\\d{2}-\\d{2})$/
@@ -156,7 +156,7 @@ describe.each(symbolMap)("DefaultTaskSerializer with '$taskFormat' symbols", ({ 
             });
 
             it('should parse a high priority without Variant Selector 16', () => {
-                const line = '⏫';
+                const line = '🔴';
                 expect(hasVariantSelector16(line)).toBe(false);
 
                 const taskDetails = deserialize(line);
@@ -165,7 +165,7 @@ describe.each(symbolMap)("DefaultTaskSerializer with '$taskFormat' symbols", ({ 
 
             it('should parse a high priority with Variant Selector 16', () => {
                 // This test showed the existence of https://github.com/obsidian-tasks-group/obsidian-tasks/issues/2273
-                const line = '⏫️'; // There is a hidden Variant Selector 16 character at the end of this string
+                const line = '🔴️'; // There is a hidden Variant Selector 16 character at the end of this string
                 expect(hasVariantSelector16(line)).toBe(true);
 
                 const taskDetails = deserialize(line);

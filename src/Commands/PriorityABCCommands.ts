@@ -7,9 +7,9 @@ import { type EditorInsertion, createEditorCallback } from './CreateEditorCallba
 /**
  * 叶武滨时间管理「ABC 分类」快捷命令：
  *
- * - A 类 = High ⏫：计划内要事，必须亲自执行（「做 A」）
- * - B 类 = Medium 🔼：突发紧急状况，计划外（「推迟 B」）
- * - C 类 = Low 🔽：内外部干扰，不重要不紧急（「记录 C」）
+ * - A 类 = High 🔴：计划内要事，必须亲自执行（「做 A」）
+ * - B 类 = Medium 🟡：突发紧急状况，计划外（「推迟 B」）
+ * - C 类 = Low 🟢：内外部干扰，不重要不紧急（「记录 C」）
  *
  * 切换语义：对已标记为目标优先级的任务再次执行同一命令时，取消标记（恢复 None）。
  */

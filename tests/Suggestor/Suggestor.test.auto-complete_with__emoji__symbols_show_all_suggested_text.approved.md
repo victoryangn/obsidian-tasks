@@ -4,9 +4,9 @@
 | 📅 due date | 📅  |
 | 🛫 start date | 🛫  |
 | ⏳ scheduled date | ⏳  |
-| ⏫ high priority | ⏫  |
-| 🔼 medium priority | 🔼  |
-| 🔽 low priority | 🔽  |
+| 🔴 high priority | 🔴  |
+| 🟡 medium priority | 🟡  |
+| 🟢 low priority | 🟢  |
 | 🔺 highest priority | 🔺  |
 | ⏬ lowest priority | ⏬  |
 | 🔁 recurring (repeat) | 🔁  |

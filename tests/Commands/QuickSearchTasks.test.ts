@@ -292,8 +292,8 @@ describe('Finding matching tasks, sorting results in expected order', () => {
 
         it('should higher priority first', () => {
             expectSortsInExpectedOrder(
-                ['- [ ] same description ⏫', '- [ ] same description 🔺'],
-                ['- [ ] same description 🔺', '- [ ] same description ⏫'],
+                ['- [ ] same description 🔴', '- [ ] same description 🔺'],
+                ['- [ ] same description 🔺', '- [ ] same description 🔴'],
                 (task: Task) => task.originalMarkdown,
             );
         });

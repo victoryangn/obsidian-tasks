@@ -202,10 +202,10 @@ describe('grouping by priority', () => {
 
     it.each([
         ['- [ ] a 🔺', ['%%0%%Highest priority']],
-        ['- [ ] a ⏫', ['%%1%%High priority']],
-        ['- [ ] a 🔼', ['%%2%%Medium priority']],
+        ['- [ ] a 🔴', ['%%1%%High priority']],
+        ['- [ ] a 🟡', ['%%2%%Medium priority']],
         ['- [ ] a', ['%%3%%Normal priority']],
-        ['- [ ] a 🔽', ['%%4%%Low priority']],
+        ['- [ ] a 🟢', ['%%4%%Low priority']],
         ['- [ ] a ⏬', ['%%5%%Lowest priority']],
     ])('task "%s" should have groups: %s', (taskLine: string, groups: string[]) => {
         // Arrange
