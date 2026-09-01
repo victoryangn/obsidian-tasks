@@ -7,6 +7,9 @@ import { toggleDone } from './ToggleDone';
 import { ensureQueryFileDefaultsInFrontmatter } from './AddQueryFileDefaultsProperties';
 import { createSetStatusCommands } from './ChangeStatusCommands';
 import { QuickSearchTasksModal } from './QuickSearchTasks';
+import { togglePriorityA, togglePriorityB, togglePriorityC } from './PriorityABCCommands';
+import { postponeOneDay } from './PostponeOneDay';
+import { moveToInbox } from './MoveTaskToInbox';
 
 export const ToggleTaskDoneCommandName = 'Toggle task done';
 
@@ -76,6 +79,49 @@ export class Commands {
         for (const command of setStatusCommands) {
             plugin.addCommand(command);
         }
+
+        this.addYeWubinCommands(plugin);
+    }
+
+    /**
+     * 叶武滨时间管理定制命令：「做 A 推迟 B 记录 C」工作流。
+     * 集中注册，便于日后 rebase 官方更新。
+     */
+    private addYeWubinCommands(plugin: TasksPlugin) {
+        plugin.addCommand({
+            id: 'toggle-priority-a',
+            name: '标记/取消 A 类要事（⏫）',
+            icon: 'flame',
+            editorCheckCallback: togglePriorityA,
+        });
+
+        plugin.addCommand({
+            id: 'toggle-priority-b',
+            name: '标记/取消 B 类（🔼）',
+            icon: 'cloud',
+            editorCheckCallback: togglePriorityB,
+        });
+
+        plugin.addCommand({
+            id: 'toggle-priority-c',
+            name: '标记/取消 C 类（🔽）',
+            icon: 'tag',
+            editorCheckCallback: togglePriorityC,
+        });
+
+        plugin.addCommand({
+            id: 'postpone-one-day',
+            name: '推迟一天（顺延最近日期）',
+            icon: 'clock',
+            editorCheckCallback: postponeOneDay,
+        });
+
+        plugin.addCommand({
+            id: 'move-task-to-inbox',
+            name: '转收件箱（清除日期，待排程）',
+            icon: 'inbox',
+            editorCheckCallback: moveToInbox,
+        });
     }
 
     async ensureQueryFileDefaultsFrontmatter(file: TFile): Promise<void> {
