@@ -7,7 +7,7 @@ Find tasks with an urgency score above `9.0`.
 Note that limiting value used is `8.9999`.
 Searches that compare two urgency values for 'less than' or 'more than' (using one of `>`, `>=`, `<` or `<=`) **must adjust their values slightly to allow for rounding**.
 =>
-- [ ] #task Highest priority 🔺
+- [ ] 🔺 #task Highest priority
 - [ ] due 2023-06-11 📅 2023-06-11
 ====================================================================================
 
@@ -15,7 +15,7 @@ Searches that compare two urgency values for 'less than' or 'more than' (using o
 filter by function task.urgency > 7.9999 && task.urgency < 11.0001
 Find tasks with an urgency score between `8.0` and `11.0`, inclusive.
 =>
-- [ ] #task Highest priority 🔺
+- [ ] 🔺 #task Highest priority
 - [ ] due 2023-06-11 📅 2023-06-11
 ====================================================================================
 
@@ -33,11 +33,11 @@ This is important, to prevent being tripped up `10.29` being not exactly the sam
 filter by function task.urgency.toFixed(2) !== 1.95.toFixed(2)
 Find tasks with any urgency other than the default score of `1.95`.
 =>
-- [ ] #task Highest priority 🔺
-- [ ] #task High priority 🔴
-- [ ] #task Medium priority 🟡
-- [ ] #task Low priority 🟢
-- [ ] #task Lowest priority ⏬
+- [ ] 🔺 #task Highest priority
+- [ ] 🔴 #task High priority
+- [ ] 🟡 #task Medium priority
+- [ ] 🟢 #task Low priority
+- [ ] ⏬ #task Lowest priority
 - [ ] due 2023-06-11 📅 2023-06-11
 ====================================================================================
 

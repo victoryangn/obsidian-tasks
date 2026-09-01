@@ -160,12 +160,20 @@ export class DefaultTaskSerializer implements TaskSerializer {
      */
     public serialize(task: Task): string {
         const taskLayoutOptions = new TaskLayoutOptions();
-        let taskString = '';
         const shortMode = false;
+        let rest = '';
         for (const component of taskLayoutOptions.shownComponents) {
-            taskString += this.componentToString(task, shortMode, component);
+            if (component === TaskLayoutComponent.Priority) continue; // 前置处理
+            rest += this.componentToString(task, shortMode, component);
         }
-        return taskString;
+        // 叶武滨定制：priority 前置（行首显示）。
+        // trimStart 仅在有 priority 时应用：无 priority 时 rest 原样返回（与官方逐字节等价）；
+        // 有 priority 时去除 rest 前导空格（空 description 场景组件带前导空格）避免双空格。
+        const priorityString = this.componentToString(task, shortMode, TaskLayoutComponent.Priority).trim();
+        if (priorityString === '') {
+            return rest;
+        }
+        return rest === '' ? priorityString : priorityString + ' ' + rest.trimStart();
     }
 
     /**
@@ -243,9 +251,35 @@ export class DefaultTaskSerializer implements TaskSerializer {
     }
 
     /**
-     * Given the string captured in the first capture group of
-     *    {@link DefaultTaskSerializerSymbols.TaskFormatRegularExpressions.priorityRegex},
-     *    returns the corresponding Priority level.
+     * 叶武滨定制：行首 priority 识别（默认 emoji 格式，🔴🟡🟢 前置显示）。
+     *
+     * 无状态纯函数：返回 { priority, line }；priority 为 null 表示行首无标记。
+     * 契约：emoji 后必须跟空格或行尾（避免与紧贴的正常文字歧义）；识别行首 emoji 后
+     * 将其从 description 剥离，优先级覆盖行尾解析值（行首赢）——重写幂等。
+     *
+     * 正则 emoji 集合与 {@link DEFAULT_SYMBOLS}.prioritySymbols 必须保持同源一致
+     * （守护测试见 tests/TaskSerializer/LeadingPriority.test.ts）。
+     *
+     * 必须与 Dataview 格式隔离（{@link DataviewTaskSerializer} 覆写为恒等）：
+     * 其 parsePriority() 覆写解析 'high' 等文本，emoji 输入经 default 分支返回
+     * {@link Priority.None}——若不隔离会造成双重危害：① 行尾 [priority:: high] 被清空；
+     * ② 行首 emoji 被剥离、description 损失。
+     */
+    protected parseLeadingPriority(line: string): { priority: Priority | null; line: string } {
+        // VS16 用显式转义（️?），与官方 fieldRegex 同款写法，避免字面量在文本传递中丢失；
+        // 前导空白用 \s* 覆盖空格与 tab
+        const leadingPriorityMatch = line.match(/^\s*(🔺|🔴|🟡|🟢|⏬)️?(?:\s|$)/);
+        if (leadingPriorityMatch) {
+            return {
+                priority: this.parsePriority(leadingPriorityMatch[1]),
+                line: line.slice(leadingPriorityMatch[0].length).trimStart(),
+            };
+        }
+        return { priority: null, line };
+    }
+
+    /**
+     * Parse a priority emoji string and returns the corresponding Priority level.
      *
      * @param p String captured by priorityRegex
      * @returns Corresponding priority if parsing was successful, otherwise {@link Priority.None}
@@ -388,6 +422,13 @@ export class DefaultTaskSerializer implements TaskSerializer {
             const separator = state.line.length > 0 ? ' ' : '';
             state.line += separator + trailingTags;
         }
+
+        // 叶武滨定制：行首 priority 识别（🔴🟡🟢 前置显示）
+        const leading = this.parseLeadingPriority(state.line);
+        if (leading.priority !== null) {
+            priority = leading.priority; // 行首赢：覆盖行尾解析值，重写幂等
+        }
+        state.line = leading.line;
 
         // NEW_TASK_FIELD_EDIT_REQUIRED
         return {

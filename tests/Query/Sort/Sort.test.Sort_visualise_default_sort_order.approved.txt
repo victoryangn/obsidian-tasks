@@ -1,12 +1,12 @@
-- [/] #task In progress 🔺 📅 1970-01-02
+- [/] 🔺 #task In progress 📅 1970-01-02
 - [/] In progress
-- [ ] #task Highest priority 🔺
-- [ ] #task High priority 🔴
+- [ ] 🔺 #task Highest priority
+- [ ] 🔴 #task High priority
 - [ ] my description 📅 2023-05-30
 - [ ] my description 📅 2023-05-31
 - [ ] my description 📅 2023-06-01
 - [ ] my description 📅 2023-06-02
-- [ ] #task Medium priority 🟡
+- [ ] 🟡 #task Medium priority
 - [ ] my description 📅 Invalid date
 - [ ] my description
 - [ ] my description 🛫 Invalid date
@@ -29,15 +29,15 @@
 - [ ] xyz in 'a/b/c.md' in heading 'c'
 - [ ] xyz in 'a/d/c.md' in heading 'heading'
 - [ ] xyz in 'e/d/c.md' in heading 'heading'
-- [ ] #task Low priority 🟢
+- [ ] 🟢 #task Low priority
 - [ ] my description 🛫 2023-05-30
 - [ ] my description 🛫 2023-05-31
 - [ ] my description 🛫 2023-06-01
 - [ ] my description 🛫 2023-06-02
-- [ ] #task Lowest priority ⏬
-- [x] #task Done 🔺 📅 1970-01-02
+- [ ] ⏬ #task Lowest priority
+- [x] 🔺 #task Done 📅 1970-01-02
 - [x] Done
-- [-] #task Cancelled 🔺 📅 1970-01-02
+- [-] 🔺 #task Cancelled 📅 1970-01-02
 - [-] Cancelled
 - [^] Non-task
 - [] Empty task

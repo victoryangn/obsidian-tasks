@@ -224,7 +224,7 @@ group by id
 
             ###### 2025-10-30 Thursday
 
-            - [ ] 3 🔴 ⏳ 2025-10-30
+            - [ ] 🔴 3 ⏳ 2025-10-30
 
             ##### %%3%%Normal priority
 
@@ -243,7 +243,7 @@ group by id
 
             ###### No scheduled date
 
-            - [ ] 2 ⏬
+            - [ ] ⏬ 2
 
             #### #something
 

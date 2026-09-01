@@ -64,7 +64,11 @@ describe('YeWubinMenu', () => {
     });
 
     it('should clear all happens dates via inbox item', async () => {
-        const task = new TaskBuilder().dueDate('2026-09-05').scheduledDate('2026-09-01').startDate('2026-08-30').build();
+        const task = new TaskBuilder()
+            .dueDate('2026-09-05')
+            .scheduledDate('2026-09-01')
+            .startDate('2026-08-30')
+            .build();
         const menu = new YeWubinMenu(task, undefined, TestableTaskSaver.testableTaskSaver);
 
         // @ts-expect-error TS2339: Property 'items' does not exist on type 'YeWubinMenu'.

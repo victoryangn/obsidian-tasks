@@ -20,7 +20,7 @@ describe('MoveTaskToInbox', () => {
     it('should preserve priority, recurrence and done date', () => {
         const input = '- [x] 已完成 🔴 🔁 every week 📅 2026-09-05 ✅ 2026-09-06';
         const result = moveToInboxLine(input, 'x.md')?.text;
-        expect(result).toStrictEqual('- [x] 已完成 🔴 🔁 every week ✅ 2026-09-06');
+        expect(result).toStrictEqual('- [x] 🔴 已完成 🔁 every week ✅ 2026-09-06');
     });
 
     it('should preserve tags and block links', () => {

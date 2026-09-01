@@ -85,7 +85,10 @@ describe('CreateOrEditTaskParser - task recognition', () => {
 
         const task = taskFromLine({ line: taskLine, path });
 
-        expect(task.toFileLineString()).toStrictEqual(taskLine);
+        // 叶武滨定制：priority 前置——往返输出将 ⏬ 移到描述前
+        expect(task.toFileLineString()).toStrictEqual(
+            '- [ ] ⏬ without global filter but with all the info 🔁 every 2 days ➕ 2022-03-10 🛫 2022-01-31 ⏳ 2023-06-13 📅 2024-12-10 ✅ 2023-06-22',
+        );
         expect(task.path).toStrictEqual('a/b/c.md');
 
         // NEW_TASK_FIELD_EDIT_REQUIRED

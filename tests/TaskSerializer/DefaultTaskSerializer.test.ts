@@ -292,7 +292,8 @@ describe.each(symbolMap)("DefaultTaskSerializer with '$taskFormat' symbols", ({ 
             for (const p of priorities) {
                 const task = new TaskBuilder().priority(Priority[p]).description('').build();
                 const serialized = serialize(task);
-                expect(serialized).toEqual(` ${symbols.prioritySymbols[p]}`);
+                // 叶武滨定制：priority 前置输出（无前导空格，'- [ ] ' 前缀由任务结构提供）
+                expect(serialized).toEqual(symbols.prioritySymbols[p]);
             }
         });
 

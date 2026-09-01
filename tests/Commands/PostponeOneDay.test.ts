@@ -45,7 +45,7 @@ describe('PostponeOneDay', () => {
 
     it('should preserve priority and recurrence when postponing', () => {
         const input = '- [ ] 任务 🔴 🔁 every week 📅 2026-09-05';
-        expect(postponeOneDayLine(input, 'x.md')?.text).toStrictEqual('- [ ] 任务 🔴 🔁 every week 📅 2026-09-06');
+        expect(postponeOneDayLine(input, 'x.md')?.text).toStrictEqual('- [ ] 🔴 任务 🔁 every week 📅 2026-09-06');
     });
 
     it('should return undefined for tasks without any dates', () => {

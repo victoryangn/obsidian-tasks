@@ -47,6 +47,6 @@ describe('startPomodoroOnLine', () => {
         const input = '- [ ] 保养车辆 🔴 🔁 every 3 months 📅 2026-09-01';
         const result = startPomodoroOnLine(input, 'x.md', true);
 
-        expect(result?.statusInsertion?.text).toStrictEqual('- [/] 保养车辆 🔴 🔁 every 3 months 📅 2026-09-01');
+        expect(result?.statusInsertion?.text).toStrictEqual('- [/] 🔴 保养车辆 🔁 every 3 months 📅 2026-09-01');
     });
 });

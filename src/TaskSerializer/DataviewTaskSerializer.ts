@@ -1,4 +1,4 @@
-import { TaskLayoutComponent } from '../Layout/TaskLayoutOptions';
+import { TaskLayoutComponent, TaskLayoutOptions } from '../Layout/TaskLayoutOptions';
 import { PriorityTools } from '../lib/PriorityTools';
 import type { Priority } from '../Task/Priority';
 import type { Task } from '../Task/Task';
@@ -105,6 +105,29 @@ export class DataviewTaskSerializer extends DefaultTaskSerializer {
 
     protected parsePriority(p: string): Priority {
         return PriorityTools.priorityValue(p);
+    }
+
+    /**
+     * 叶武滨定制：行首 priority **不前置**——保持官方循环，`  [priority:: high]` 仍输出在行尾，
+     * 与行尾解析正则往返一致。
+     */
+    public serialize(task: Task): string {
+        const taskLayoutOptions = new TaskLayoutOptions();
+        let taskString = '';
+        const shortMode = false;
+        for (const component of taskLayoutOptions.shownComponents) {
+            taskString += this.componentToString(task, shortMode, component);
+        }
+        return taskString;
+    }
+
+    /**
+     * 叶武滨定制：Dataview 格式无行首 emoji 语义，恒等返回（守护行尾 [priority:: high]：
+     * 若继承 Default 的实现，行首 🔴 会被剥离且 parsePriority('🔴') 经 default 分支返回
+     * Priority.None，清空行尾已解析的优先级）。
+     */
+    protected parseLeadingPriority(line: string): { priority: Priority | null; line: string } {
+        return { priority: null, line };
     }
 
     public componentToString(task: Task, shortMode: boolean, component: TaskLayoutComponent) {
