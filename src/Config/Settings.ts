@@ -288,6 +288,25 @@ function migrateSettings(loadedSettings: Record<string, unknown>): Partial<Setti
         delete migratedSettings.includes;
     }
 
+    // The saved 'presets' replaces 'defaultPresets' wholesale (shallow merge in updateSettings),
+    // so vaults saved before ye_* presets existed would never see them.
+    // Backfill only the ye_-prefixed custom presets: user edits to any ye_* value win,
+    // and user additions/deletions of the official built-in presets are untouched.
+    // Trade-off: a user-deleted ye_* preset is resurrected on restart — acceptable for
+    // this fork's own namespace.
+    if (
+        migratedSettings.presets &&
+        typeof migratedSettings.presets === 'object' &&
+        !Array.isArray(migratedSettings.presets)
+    ) {
+        const savedPresets = migratedSettings.presets as Record<string, unknown>;
+        for (const key of Object.keys(defaultPresets) as (keyof typeof defaultPresets)[]) {
+            if (key.startsWith('ye_') && !Object.prototype.hasOwnProperty.call(savedPresets, key)) {
+                savedPresets[key] = defaultPresets[key];
+            }
+        }
+    }
+
     // Add future migrations here as needed
 
     return migratedSettings;

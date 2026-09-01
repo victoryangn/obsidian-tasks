@@ -412,7 +412,13 @@ describe('include - error messages', () => {
             const query = createQuery('preset not_existent', includes);
             expect(query.error).toMatchInlineSnapshot(`
                 "Cannot find preset "not_existent" in the Tasks settings
-                You can define the instruction(s) for "not_existent" in the Tasks settings.
+                The following presets are defined in the Tasks settings:
+                  ye_clean       : # 紧凑显示（Dashboard 用）...
+                  ye_inbox       : # 收件箱待排程：看板「收件箱」栏...
+                  ye_overdue     : # 逾期任务...
+                  ye_today_a     : # 今日 A 类要事（含逾期 A 类）...
+                  ye_waiting     : # 等待回复：看板「委托等待」栏...
+                  ye_waiting_date: # 等待回复：全库未来日程（⏳/🛫 在今天之后）...
                 Problem line: "preset not_existent""
             `);
         });
@@ -456,6 +462,12 @@ describe('include - error messages', () => {
                   include2            : task.due.format("YYYY")
                   include3            : (filename includes File 1) AND ( (heading includes...
                   include4_longer_name: (filename includes File 1) AND \\...
+                  ye_clean            : # 紧凑显示（Dashboard 用）...
+                  ye_inbox            : # 收件箱待排程：看板「收件箱」栏...
+                  ye_overdue          : # 逾期任务...
+                  ye_today_a          : # 今日 A 类要事（含逾期 A 类）...
+                  ye_waiting          : # 等待回复：看板「委托等待」栏...
+                  ye_waiting_date     : # 等待回复：全库未来日程（⏳/🛫 在今天之后）...
                 Problem line: "preset not_existent""
             `);
         });
@@ -566,6 +578,37 @@ describe('include settings tests', () => {
               "this_folder": "folder includes {{query.file.folder}}",
               "this_folder_only": "filter by function task.file.folder === query.file.folder",
               "this_root": "root includes {{query.file.root}}",
+              "ye_clean": "# 紧凑显示（Dashboard 用）
+            hide edit button
+            hide postpone button
+            hide backlinks
+            hide created date
+            hide start date
+            hide cancelled date
+            hide id
+            hide depends on",
+              "ye_inbox": "# 收件箱待排程：看板「收件箱」栏
+            not done
+            path includes 1. 任务管理
+            heading includes 收件箱",
+              "ye_overdue": "# 逾期任务
+            not done
+            happens before today
+            sort by happens
+            limit 30",
+              "ye_today_a": "# 今日 A 类要事（含逾期 A 类）
+            not done
+            priority is high
+            happens on or before today",
+              "ye_waiting": "# 等待回复：看板「委托等待」栏
+            not done
+            path includes 1. 任务管理
+            heading includes 委托等待",
+              "ye_waiting_date": "# 等待回复：全库未来日程（⏳/🛫 在今天之后）
+            not done
+            (scheduled after today) OR (starts after today)
+            sort by happens
+            limit 30",
             }
         `);
     });

@@ -12,6 +12,15 @@ export const defaultPresets = {
         '# Hide toolbar, postpone, edit, backlinks and task count\nhide toolbar\nhide postpone button\nhide edit button\nhide backlinks\nhide task count',
     hide_everything:
         '# Hide everything except description and any tags\npreset hide_date_fields\npreset hide_non_date_fields\npreset hide_query_elements',
+    // ===== 叶武滨定制 presets（ye_ 前缀为定制版自有命名空间，key 稳定勿改名：Dashboard/日记模板引用）=====
+    ye_today_a: '# 今日 A 类要事（含逾期 A 类）\nnot done\npriority is high\nhappens on or before today',
+    ye_overdue: '# 逾期任务\nnot done\nhappens before today\nsort by happens\nlimit 30',
+    ye_waiting: '# 等待回复：看板「委托等待」栏\nnot done\npath includes 1. 任务管理\nheading includes 委托等待',
+    ye_waiting_date:
+        '# 等待回复：全库未来日程（⏳/🛫 在今天之后）\nnot done\n(scheduled after today) OR (starts after today)\nsort by happens\nlimit 30',
+    ye_inbox: '# 收件箱待排程：看板「收件箱」栏\nnot done\npath includes 1. 任务管理\nheading includes 收件箱',
+    ye_clean:
+        '# 紧凑显示（Dashboard 用）\nhide edit button\nhide postpone button\nhide backlinks\nhide created date\nhide start date\nhide cancelled date\nhide id\nhide depends on',
 };
 
 function summariseInstruction(instructions: string) {
