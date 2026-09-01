@@ -120,10 +120,12 @@ describe('settings migration', () => {
         const currentSettings = getSettings();
 
         // Assert: Verify migration happened correctly
-        expect(currentSettings.presets).toEqual({
+        // (ye_* presets are backfilled into any saved presets — see migrateSettings)
+        expect(currentSettings.presets).toMatchObject({
             'my-preset': 'some query value',
             'another-preset': 'another query',
         });
+        expect(Object.keys(currentSettings.presets).filter((key) => key.startsWith('ye_')).length).toBeGreaterThan(0);
         expect((currentSettings as any).includes).toBeUndefined();
         expect(currentSettings.globalQuery).toBe('test query');
     });
@@ -144,10 +146,11 @@ describe('settings migration', () => {
         const currentSettings = getSettings();
 
         // Assert: Should keep the new "presets" and ignore "includes"
-        expect(currentSettings.presets).toEqual({
+        // (ye_* presets are backfilled into any saved presets — see migrateSettings)
+        expect(currentSettings.presets).toMatchObject({
             'new-preset': 'new value',
         });
-        expect(currentSettings.presets).not.toEqual({
+        expect(currentSettings.presets).not.toMatchObject({
             'old-preset': 'old value',
         });
     });
@@ -164,7 +167,8 @@ describe('settings migration', () => {
         const currentSettings = getSettings();
 
         // Assert
-        expect(currentSettings.presets).toEqual({});
+        // (empty presets still get the ye_* backfill — see migrateSettings)
+        expect(Object.keys(currentSettings.presets).every((key) => key.startsWith('ye_'))).toBe(true);
         expect((currentSettings as any).includes).toBeUndefined();
     });
 
