@@ -609,6 +609,62 @@ export class SettingsTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                 });
             });
+
+        // ---------------------------------------------------------------------------
+        // 叶武滨定制：255 番茄钟
+        // ---------------------------------------------------------------------------
+        new Setting(containerEl).setName('🍅 255 番茄钟').setHeading();
+
+        new Setting(containerEl).setName('专注时长（分钟）').addSlider((slider) => {
+            const settings = getSettings();
+            slider
+                .setLimits(5, 45, 5)
+                .setValue(settings.pomodoro.workMinutes)
+                .setDynamicTooltip()
+                .onChange(async (value) => {
+                    updateSettings({ pomodoro: { ...getSettings().pomodoro, workMinutes: value } });
+                    await this.plugin.saveSettings();
+                });
+        });
+
+        new Setting(containerEl).setName('休息时长（分钟）').addSlider((slider) => {
+            const settings = getSettings();
+            slider
+                .setLimits(3, 10, 1)
+                .setValue(settings.pomodoro.breakMinutes)
+                .setDynamicTooltip()
+                .onChange(async (value) => {
+                    updateSettings({ pomodoro: { ...getSettings().pomodoro, breakMinutes: value } });
+                    await this.plugin.saveSettings();
+                });
+        });
+
+        new Setting(containerEl).setName('专注结束后自动开始休息').addToggle((toggle) => {
+            const settings = getSettings();
+            toggle.setValue(settings.pomodoro.autoStartBreak).onChange(async (value) => {
+                updateSettings({ pomodoro: { ...getSettings().pomodoro, autoStartBreak: value } });
+                await this.plugin.saveSettings();
+            });
+        });
+
+        new Setting(containerEl)
+            .setName('使用系统通知')
+            .setDesc('关闭后在 Obsidian 应用内提示（移动端始终使用应用内提示）')
+            .addToggle((toggle) => {
+                const settings = getSettings();
+                toggle.setValue(settings.pomodoro.systemNotifications).onChange(async (value) => {
+                    updateSettings({ pomodoro: { ...getSettings().pomodoro, systemNotifications: value } });
+                    await this.plugin.saveSettings();
+                });
+            });
+
+        new Setting(containerEl).setName('启动时将任务置为进行中（/）').addToggle((toggle) => {
+            const settings = getSettings();
+            toggle.setValue(settings.pomodoro.markInProgress).onChange(async (value) => {
+                updateSettings({ pomodoro: { ...getSettings().pomodoro, markInProgress: value } });
+                await this.plugin.saveSettings();
+            });
+        });
     }
 
     private seeTheDocumentation(url: string) {

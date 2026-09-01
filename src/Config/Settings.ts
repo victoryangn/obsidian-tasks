@@ -63,8 +63,18 @@ export const TASK_FORMATS = {
 
 export type TASK_FORMATS = typeof TASK_FORMATS; // For convenience to make some typing easier
 
+export interface PomodoroSettings {
+    workMinutes: number;
+    breakMinutes: number;
+    autoStartBreak: boolean;
+    systemNotifications: boolean;
+    /** 启动番茄钟时是否将任务置为 In Progress（/） */
+    markInProgress: boolean;
+}
+
 export interface Settings {
     presets: PresetsMap;
+    pomodoro: PomodoroSettings;
     globalQuery: string;
     globalFilter: string;
     removeGlobalFilter: boolean;
@@ -111,6 +121,13 @@ export interface Settings {
 
 const defaultSettings: Readonly<Settings> = {
     presets: defaultPresets,
+    pomodoro: {
+        workMinutes: 25,
+        breakMinutes: 5,
+        autoStartBreak: true,
+        systemNotifications: true,
+        markInProgress: true,
+    },
     globalQuery: '',
     globalFilter: '',
     removeGlobalFilter: false,

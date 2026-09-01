@@ -22,11 +22,13 @@ import { QueryFileDefaults } from './Query/QueryFileDefaults';
 import { LinkResolver } from './Task/LinkResolver';
 import { ObsidianLocalStorageProvider } from './Config/ObsidianLocalStorageProvider';
 import { EnableJsInTasksQueries } from './Config/EnableJsInTasksQueries';
+import { PomodoroService } from './Pomodoro/PomodoroService';
 
 export default class TasksPlugin extends Plugin {
     private cache: Cache | undefined;
     public inlineRenderer: InlineRenderer | undefined;
     public queryRenderer: QueryRenderer | undefined;
+    public pomodoroService: PomodoroService | undefined;
 
     get apiV1() {
         return tasksApiV1(this);
@@ -81,6 +83,10 @@ export default class TasksPlugin extends Plugin {
 
         this.registerEditorExtension(newLivePreviewExtension(this));
         this.registerEditorSuggest(new EditorSuggestor(this.app, getSettings(), this));
+
+        // 叶武滨定制：255 番茄钟（状态栏 + 通知），须在 Commands 之前创建（命令引用它）
+        this.pomodoroService = new PomodoroService(this);
+
         new Commands({ plugin: this });
     }
 
@@ -92,6 +98,7 @@ export default class TasksPlugin extends Plugin {
     onunload() {
         log('info', i18n.t('main.unloadingPlugin', { name: this.manifest.name, version: this.manifest.version }));
         this.cache?.unload();
+        this.pomodoroService?.unload();
     }
 
     async loadSettings() {

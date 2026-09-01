@@ -10,6 +10,7 @@ import { QuickSearchTasksModal } from './QuickSearchTasks';
 import { togglePriorityA, togglePriorityB, togglePriorityC } from './PriorityABCCommands';
 import { postponeOneDay } from './PostponeOneDay';
 import { moveToInbox } from './MoveTaskToInbox';
+import { createStartPomodoroCallback } from './StartPomodoro';
 
 export const ToggleTaskDoneCommandName = 'Toggle task done';
 
@@ -121,6 +122,15 @@ export class Commands {
             name: '转收件箱（清除日期，待排程）',
             icon: 'inbox',
             editorCheckCallback: moveToInbox,
+        });
+
+        plugin.addCommand({
+            id: 'start-pomodoro',
+            name: '启动 25+5 番茄钟（当前行任务）',
+            icon: 'timer',
+            editorCheckCallback: createStartPomodoroCallback(
+                (description) => this.plugin.pomodoroService?.start(description) ?? false,
+            ),
         });
     }
 
