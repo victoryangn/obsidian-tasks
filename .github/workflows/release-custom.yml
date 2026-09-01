@@ -1,0 +1,39 @@
+name: Release Yewubin Custom Build
+
+# 叶武滨定制版发布：push 形如 8.4.0-ye.1 的 tag 时，自动构建并创建 GitHub Release，
+# 附上 Obsidian/BRAT 识别的三件套（main.js、manifest.json、styles.css）。
+# BRAT 用户即可在 Obsidian 内一键更新。
+on:
+  push:
+    tags:
+      - '*-ye.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build plugin
+        run: yarn build
+
+      - name: Create Release and upload plugin assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          echo "Releasing ${TAG}..."
+          gh release create "${TAG}" \
+            --title "Tasks 叶武滨定制版 ${TAG}" \
+            --notes "叶武滨时间管理定制版（A 类要事 🔴 / 255 番茄钟 / 晨间日记体系）。基于官方 obsidian-tasks 构建的 fork。" \
+            main.js manifest.json styles.css

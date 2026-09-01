@@ -6,6 +6,8 @@ on:
     - '*' # Push events to matching any tag format, i.e. 1.0, 20.15.10
 jobs:
   build:
+    # 叶武滨定制：跳过定制版 tag（由 release-custom.yml 处理）
+    if: ${{ !contains(github.ref, '-ye.') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
