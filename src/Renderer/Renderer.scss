@@ -152,3 +152,32 @@ a.tasks-edit, a.tasks-postpone {
 .task-list-item .task-block-link{
     display: none;
 }
+
+/* ===== 叶武滨定制：A/B/C 类视觉层级 ===== */
+/* 选择器基于 li[data-task-priority]（官方稳定钩子，即使 hide priority 也写入）；
+   颜色使用 Obsidian CSS 变量，明暗主题自适应。 */
+
+/* A 类（⏫ high）：左侧红条 + 淡红底 + 描述加粗 */
+ul > li.task-list-item[data-task-priority='high'] {
+    background: rgba(var(--color-red-rgb, 226 85 75), 0.1);
+    border-left: 3px solid var(--color-red, #e2554b);
+    border-radius: var(--radius-s, 4px);
+
+    & > .task-description,
+    & .task-description {
+        font-weight: 600;
+    }
+}
+
+/* B 类（🔼 medium）：淡黄底 */
+ul > li.task-list-item[data-task-priority='medium'] {
+    background: rgba(var(--color-yellow-rgb, 224 186 24), 0.08);
+}
+
+/* C 类（🔽 low）：文字弱化 */
+ul > li.task-list-item[data-task-priority='low'] {
+    & > .task-description,
+    & .task-description {
+        color: var(--text-faint);
+    }
+}

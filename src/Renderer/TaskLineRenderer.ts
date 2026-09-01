@@ -6,13 +6,12 @@ import { splitDateText } from '../DateTime/Postponer';
 import type { QueryLayoutOptions } from '../Layout/QueryLayoutOptions';
 import { TaskLayoutComponent, type TaskLayoutOptions } from '../Layout/TaskLayoutOptions';
 import { replaceTaskWithTasks } from '../Obsidian/File';
-import { StatusRegistry } from '../Statuses/StatusRegistry';
 import type { ListItem } from '../Task/ListItem';
 import { Task } from '../Task/Task';
 import { TaskRegularExpressions } from '../Task/TaskRegularExpressions';
 import { DateMenu } from '../ui/Menus/DateMenu';
 import { promptForDate } from '../ui/Menus/DatePicker';
-import { StatusMenu } from '../ui/Menus/StatusMenu';
+import { YeWubinMenu } from '../ui/Menus/YeWubinMenu';
 import { defaultTaskSaver, showMenu } from '../ui/Menus/TaskEditingMenu';
 import { TaskFieldRenderer } from './TaskFieldRenderer';
 
@@ -184,7 +183,8 @@ export class TaskLineRenderer {
             });
 
             checkbox.addEventListener('contextmenu', (ev: MouseEvent) => {
-                showMenu(ev, new StatusMenu(StatusRegistry.getInstance(), task));
+                // 叶武滨定制：状态项 + 「做A推迟B记录C」合并菜单（阅读视图/Dashboard 可用）
+                showMenu(ev, new YeWubinMenu(task));
             });
             checkbox.setAttribute('title', 'Right-click for options');
         }
